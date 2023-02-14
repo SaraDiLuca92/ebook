@@ -1,10 +1,10 @@
-import { Jumbotron } from 'react-bootstrap'
+import React from "react";
 
 const MyJumbotron = () => (
-  <Jumbotron className="text-center">
+  <div className="text-center">
     <h1>Welcome to EpiBooks!</h1>
     <p>We list books</p>
-  </Jumbotron>
-)
+  </div>
+);
 
-export default MyJumbotron
+export default MyJumbotron;

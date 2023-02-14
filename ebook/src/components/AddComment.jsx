@@ -1,14 +1,14 @@
-import { Component } from 'react'
-import { Button, Form } from 'react-bootstrap'
+import { Component } from "react";
+import { Button, Form } from "react-bootstrap";
 
 class AddComment extends Component {
   state = {
     comment: {
-      comment: '',
+      comment: "",
       rate: 1,
       elementId: this.props.asin,
     },
-  }
+  };
 
   componentDidUpdate(prevProps) {
     if (prevProps.asin !== this.props.asin) {
@@ -17,41 +17,42 @@ class AddComment extends Component {
           ...this.state.comment,
           elementId: this.props.asin,
         },
-      })
+      });
     }
   }
 
   sendComment = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     try {
       let response = await fetch(
-        'https://striveschool-api.herokuapp.com/api/comments',
+        "https://striveschool-api.herokuapp.com/api/comments/",
         {
-          method: 'POST',
+          method: "POST",
           body: JSON.stringify(this.state.comment),
           headers: {
-            'Content-type': 'application/json',
-            Authorization: 'Bearer your-auth-token-goes-here',
+            "Content-type": "application/json",
+            Authorization:
+              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2U0ZmE3YmEyNDc4ZDAwMTNhMDU4MDciLCJpYXQiOjE2NzYzODIzNTUsImV4cCI6MTY3NzU5MTk1NX0.tSdzj9XeD4jGo4V-r5xU62hDI6Q4koNrGh80MLwYUBU",
           },
         }
-      )
+      );
       if (response.ok) {
-        alert('Comment was sent!')
+        alert("Comment was sent!");
         this.setState({
           comment: {
-            comment: '',
+            comment: "",
             rate: 1,
             elementId: this.props.asin,
           },
-        })
+        });
       } else {
-        console.log('error')
-        alert('something went wrong')
+        console.log("error");
+        alert("something went wrong");
       }
     } catch (error) {
-      console.log('error')
+      console.log("error");
     }
-  }
+  };
 
   render() {
     return (
@@ -99,8 +100,8 @@ class AddComment extends Component {
           </Button>
         </Form>
       </div>
-    )
+    );
   }
 }
 
-export default AddComment
+export default AddComment;
